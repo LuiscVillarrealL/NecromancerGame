@@ -5,41 +5,76 @@ public class SelectionManager : MonoBehaviour
 {
     public static SelectionManager Instance { get; private set; }
 
-    public List<Unit> SelectedUnits { get; private set; } = new();
+    public IReadOnlyList<Unit> SelectedUnits => _selectedUnits;
+    private readonly List<Unit> _selectedUnits = new();
+
+    // Control groups: 0..9
+    private readonly Dictionary<int, List<Unit>> _controlGroups = new();
 
     void Awake()
     {
-        if (Instance != null)
-        {
-            Destroy(gameObject);
-            return;
-        }
+        if (Instance != null) { Destroy(gameObject); return; }
         Instance = this;
-    }
 
-    public void Select(Unit unit)
-    {
-        if (SelectedUnits.Contains(unit))
-            return;
-
-        SelectedUnits.Add(unit);
-        unit.SetSelected(true);
-    }
-
-    public void Deselect(Unit unit)
-    {
-        if (!SelectedUnits.Contains(unit))
-            return;
-
-        SelectedUnits.Remove(unit);
-        unit.SetSelected(false);
+        // init groups
+        for (int i = 0; i <= 9; i++)
+            _controlGroups[i] = new List<Unit>();
     }
 
     public void ClearSelection()
     {
-        foreach (var unit in SelectedUnits)
-            unit.SetSelected(false);
+        foreach (var u in _selectedUnits)
+            if (u) u.SetSelected(false);
 
-        SelectedUnits.Clear();
+        _selectedUnits.Clear();
+    }
+
+    public void AddToSelection(Unit unit)
+    {
+        if (!unit) return;
+        if (_selectedUnits.Contains(unit)) return;
+
+        _selectedUnits.Add(unit);
+        unit.SetSelected(true);
+    }
+
+    public void RemoveFromSelection(Unit unit)
+    {
+        if (!unit) return;
+        if (!_selectedUnits.Contains(unit)) return;
+
+        _selectedUnits.Remove(unit);
+        unit.SetSelected(false);
+    }
+
+    public void ToggleSelection(Unit unit)
+    {
+        if (!unit) return;
+
+        if (_selectedUnits.Contains(unit)) RemoveFromSelection(unit);
+        else AddToSelection(unit);
+    }
+
+    public void SetSelection(IEnumerable<Unit> units)
+    {
+        ClearSelection();
+        foreach (var u in units)
+            AddToSelection(u);
+    }
+
+    // Control groups
+    public void AssignGroup(int number)
+    {
+        _controlGroups[number].Clear();
+        foreach (var u in _selectedUnits)
+            if (u) _controlGroups[number].Add(u);
+    }
+
+    public void RecallGroup(int number)
+    {
+        // Clean nulls (destroyed units)
+        _controlGroups[number].RemoveAll(u => u == null);
+
+        SetSelection(_controlGroups[number]);
     }
 }
