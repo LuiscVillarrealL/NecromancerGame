@@ -1,4 +1,3 @@
-
 ---
 name: Bug Report
 about: Report broken gameplay or unexpected behavior
