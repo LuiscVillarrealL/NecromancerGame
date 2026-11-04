@@ -1,4 +1,3 @@
-
 ---
 name: Game Idea
 about: Capture a gameplay concept
