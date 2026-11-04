@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class InventoryUI : MonoBehaviour
 {
-    public static InventoryUI Instance { get; private set; }
+    public static InventoryUI Instance { get; private set; } 
 
     [Header("Window")]
     public GameObject inventoryWindow;

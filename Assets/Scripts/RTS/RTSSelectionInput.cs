@@ -97,7 +97,9 @@ public class RTSSelectionInput : MonoBehaviour
 
         // Simple approach: iterate all Units in scene.
         // Later you can optimize by registering units in a list.
-        Unit[] allUnits = FindObjectsOfType<Unit>();
+        Unit[] allUnits = FindObjectsByType<Unit>();
+        // Preserve the InstanceID order previously returned by FindObjectsOfType.
+        System.Array.Sort(allUnits, (a, b) => unchecked((int)EntityId.ToULong(a.GetEntityId())).CompareTo(unchecked((int)EntityId.ToULong(b.GetEntityId()))));
         foreach (var unit in allUnits)
         {
             Vector3 screenPos = Camera.main.WorldToScreenPoint(unit.transform.position);

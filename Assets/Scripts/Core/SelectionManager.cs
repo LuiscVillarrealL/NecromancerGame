@@ -31,7 +31,7 @@ public class SelectionManager : MonoBehaviour
 
     public void AddToSelection(Unit unit)
     {
-        if (!unit) return;
+        if (!unit || !unit.IsPlayerControlled) return;
         if (_selectedUnits.Contains(unit)) return;
 
         _selectedUnits.Add(unit);

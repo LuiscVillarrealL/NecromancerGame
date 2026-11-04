@@ -25,9 +25,9 @@ public class RTSCameraController : MonoBehaviour
     {
         if (cam == null) return;
 
-        // Pan with WASD / Arrow keys
-        float h = Input.GetAxisRaw("Horizontal");
-        float v = Input.GetAxisRaw("Vertical");
+        // Arrow keys pan the camera; WASD controls the main character.
+        float h = (Input.GetKey(KeyCode.RightArrow) ? 1f : 0f) - (Input.GetKey(KeyCode.LeftArrow) ? 1f : 0f);
+        float v = (Input.GetKey(KeyCode.UpArrow) ? 1f : 0f) - (Input.GetKey(KeyCode.DownArrow) ? 1f : 0f);
 
         // Move relative to camera rig's facing (keeps pan feeling correct in isometric)
         Vector3 right = transform.right;
