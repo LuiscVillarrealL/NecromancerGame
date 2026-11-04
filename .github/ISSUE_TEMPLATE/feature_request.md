@@ -1,4 +1,3 @@
-
 ---
 name: Feature Request
 about: Plan a new gameplay feature
