@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2570ec74f3f844d4d97105791241926c, type: 3}
+  m_Name: FactionRelations
+  m_EditorClassIdentifier: Assembly-CSharp::FactionRelations
+  relations:
+  - factionA: {fileID: 11400000, guid: 54fea6fdd0302f647b59737fc0b9502d, type: 2}
+    factionB: {fileID: 11400000, guid: b61d9432426f07245be37dc54b80dd0a, type: 2}
+    relationship: 2
+  - factionA: {fileID: 11400000, guid: 54fea6fdd0302f647b59737fc0b9502d, type: 2}
+    factionB: {fileID: 11400000, guid: e251cabd4bab42b4c8bb6ac734562cd6, type: 2}
+    relationship: 0
+  - factionA: {fileID: 11400000, guid: b61d9432426f07245be37dc54b80dd0a, type: 2}
+    factionB: {fileID: 11400000, guid: e251cabd4bab42b4c8bb6ac734562cd6, type: 2}
+    relationship: 1

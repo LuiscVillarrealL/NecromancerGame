@@ -31,7 +31,7 @@ public class SelectionManager : MonoBehaviour
 
     public void AddToSelection(Unit unit)
     {
-        if (!unit || !unit.IsPlayerControlled) return;
+        if (!unit || !unit.IsPlayerControlled || unit.IsDead || !unit.gameObject.activeInHierarchy) return;
         if (_selectedUnits.Contains(unit)) return;
 
         _selectedUnits.Add(unit);
@@ -53,6 +53,13 @@ public class SelectionManager : MonoBehaviour
 
         if (_selectedUnits.Contains(unit)) RemoveFromSelection(unit);
         else AddToSelection(unit);
+    }
+
+    public void RemoveUnit(Unit unit)
+    {
+        RemoveFromSelection(unit);
+        foreach (var group in _controlGroups.Values)
+            group.Remove(unit);
     }
 
     public void SetSelection(IEnumerable<Unit> units)
