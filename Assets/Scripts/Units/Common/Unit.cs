@@ -1,6 +1,8 @@
 using UnityEngine;
 using static FactionRelations;
 
+[RequireComponent(typeof(UnitVision))]
+
 public class Unit : MonoBehaviour
 {
     public enum UnitFaction { Player, Enemy, Neutral }
@@ -10,10 +12,12 @@ public class Unit : MonoBehaviour
     [SerializeField] private bool isPlayerControlled;
     [SerializeField] private GameObject selectionVisual;
 
-    [Header("Health")]
+    [Header("Max Health")]
     [SerializeField, Min(1)] private int maxHealth = 100;
 
     public int MaxHealth => maxHealth;
+    [field: SerializeField]
+    [field: Tooltip("Runtime health. Initialized to Max Health when the unit awakens. Use TakeDamage or Heal to trigger health events.")]
     public int CurrentHealth { get; private set; }
     public bool IsDead => CurrentHealth <= 0;
     public event System.Action<int, int> HealthChanged;
@@ -54,16 +58,24 @@ public bool IsEnemy(Unit other)
 
         CurrentHealth -= Mathf.Min(amount, CurrentHealth);
         bool died = IsDead;
+        HealthChanged?.Invoke(CurrentHealth, maxHealth);
         if (died)
         {
-            if (SelectionManager.Instance != null)
-                SelectionManager.Instance.RemoveUnit(this);
-            SetSelected(false);
-            gameObject.SetActive(false);
+            Die(died);
         }
 
-        HealthChanged?.Invoke(CurrentHealth, maxHealth);
+
+
+    }
+
+    private void Die(bool died)
+    {
+        if (SelectionManager.Instance != null)
+            SelectionManager.Instance.RemoveUnit(this);
+        SetSelected(false);
+        Debug.Log("This unit died!");
         if (died) Died?.Invoke();
+        gameObject.SetActive(false);
     }
 
     public void Heal(int amount)

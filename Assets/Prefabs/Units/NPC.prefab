@@ -9,9 +9,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2719175713756863461}
+  - component: {fileID: 7072116837937337344}
+  - component: {fileID: 7072116837937337343}
   - component: {fileID: 5379052296309446112}
   - component: {fileID: 2568021506412380566}
   - component: {fileID: 4235574520867169080}
+  - component: {fileID: 5058791962761198864}
   m_Layer: 0
   m_Name: NPC
   m_TagString: Untagged
@@ -36,6 +39,37 @@ Transform:
   - {fileID: 4667236276922646137}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7072116837937337344
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5419154829027645660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d438ac17755cdd4499d331104423dedd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 10
+  attackRange: 1.5
+  attackCooldown: 1
+--- !u!114 &7072116837937337343
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5419154829027645660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae86bba737814721893742b91bb91368, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leader: {fileID: 0}
+  followOffset: {x: 0, y: 0, z: -2}
+  followDistance: 0.75
+  repathInterval: 0.25
 --- !u!195 &5379052296309446112
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -82,9 +116,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73ce4b1d273bb654781c2b3329ef811f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Unit
-  faction: 2
+  faction: {fileID: 11400000, guid: e251cabd4bab42b4c8bb6ac734562cd6, type: 2}
+  factionRelations: {fileID: 11400000, guid: 53b09e6d544b7484a9d78bd45cd06e72, type: 2}
+  isPlayerControlled: 0
   selectionVisual: {fileID: 7072116837937337342}
   maxHealth: 100
+  <CurrentHealth>k__BackingField: 0
+--- !u!114 &5058791962761198864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5419154829027645660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c60296ad2f5149e44953b833b38857bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UnitVision
+  visionRange: 8
+  visionAngle: 90
+  visionColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
 --- !u!1 &6336357841474200120
 GameObject:
   m_ObjectHideFlags: 0

@@ -14,6 +14,7 @@ public class UnitCombat : MonoBehaviour
     private float _nextAttackTime;
 
     public Unit Target => _target;
+    public float AttackRange => attackRange;
 
     private void Awake()
     {
