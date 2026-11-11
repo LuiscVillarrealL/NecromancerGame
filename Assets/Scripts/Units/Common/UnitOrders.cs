@@ -10,6 +10,7 @@ public class UnitOrders : MonoBehaviour
     [SerializeField] private Vector3 followOffset = new Vector3(0f, 0f, -2f);
     [SerializeField, Min(0.1f)] private float followDistance = 0.75f;
     [SerializeField, Min(0.1f)] private float repathInterval = 0.25f;
+    [SerializeField, Min(0.1f)] private float targetScanInterval = 0.25f;
 
     public Order CurrentOrder { get; private set; } = Order.Hold;
     public Transform FollowTarget => leader;
@@ -17,17 +18,40 @@ public class UnitOrders : MonoBehaviour
     private UnitMovement _movement;
     private UnitCombat _combat;
     private float _nextRepath;
+    private float _nextTargetScan;
+    private UnitVision _vision;
 
     private void Awake()
     {
         _unit = GetComponent<Unit>();
         _movement = GetComponent<UnitMovement>();
         _combat = GetComponent<UnitCombat>();
+        _vision = GetComponent<UnitVision>();
     }
 
     private void Start()
     {
         if (leader != null) Follow(leader.GetComponent<Unit>());
+    }
+
+    private void OnEnable()
+    {
+        _unit.Attacked += HandleAttacked;
+    }
+
+    private void HandleAttacked(Unit attacker)
+    {
+        // Hold is also the idle state. Active orders take priority over retaliation.
+        if (_unit.IsDead || CurrentOrder != Order.Hold ||
+            !IsValid(attacker) || !_unit.IsEnemy(attacker)) return;
+
+        Vector3 direction = attacker.transform.position - transform.position;
+        direction.y = 0f;
+        if (direction.sqrMagnitude > 0.001f)
+            transform.rotation = Quaternion.LookRotation(direction);
+
+        UnitVision vision = GetComponent<UnitVision>();
+        if (vision != null && vision.CanSee(attacker)) Attack(attacker);
     }
 
     public void Hold()
@@ -82,6 +106,13 @@ public class UnitOrders : MonoBehaviour
     private void Update()
     {
         if (_unit.IsDead) return;
+        if (CurrentOrder == Order.Hold && _combat != null && _combat.isActiveAndEnabled &&
+            _vision != null && Time.time >= _nextTargetScan)
+        {
+            _nextTargetScan = Time.time + targetScanInterval;
+            Unit target = _vision.FindNearestVisibleEnemy(_unit);
+            if (target != null) Attack(target);
+        }
         if (CurrentOrder == Order.Move)
         {
             if (_movement.HasArrived) Hold();
@@ -123,6 +154,7 @@ public class UnitOrders : MonoBehaviour
 
     private void OnDisable()
     {
+        if (_unit != null) _unit.Attacked -= HandleAttacked;
         if (_movement != null) Hold();
     }
 }
