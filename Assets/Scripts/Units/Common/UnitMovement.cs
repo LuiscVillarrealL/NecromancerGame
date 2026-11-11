@@ -5,6 +5,10 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 public class UnitMovement : MonoBehaviour
 {
+    [Header("Movement Response")]
+    [SerializeField, Min(1f)] private float acceleration = 100f;
+    [SerializeField, Min(1f)] private float turnSpeed = 1080f;
+
     private NavMeshAgent agent;
     public bool IsReady => agent != null && agent.isActiveAndEnabled && agent.isOnNavMesh;
     public bool HasArrived => IsReady && !agent.pathPending &&
@@ -13,6 +17,8 @@ public class UnitMovement : MonoBehaviour
     void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
+        agent.acceleration = acceleration;
+        agent.angularSpeed = turnSpeed;
     }
 
     public void MoveTo(Vector3 destination)
@@ -34,7 +40,9 @@ public class UnitMovement : MonoBehaviour
 
     public void Stop()
     {
-        if (IsReady) agent.ResetPath();
+        if (!IsReady) return;
+        agent.ResetPath();
+        agent.velocity = Vector3.zero;
     }
 
     public float Speed => agent.velocity.magnitude;

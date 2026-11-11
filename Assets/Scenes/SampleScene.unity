@@ -243,7 +243,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Unity.AI.Navigation::Unity.AI.Navigation.NavMeshSurface
   m_SerializedVersion: 0
   m_AgentTypeID: 0
@@ -294,7 +294,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.GraphicRaycaster
   m_IgnoreReversedGraphics: 1
   m_BlockingObjects: 0
@@ -311,7 +311,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.CanvasScaler
   m_UiScaleMode: 0
   m_ReferencePixelsPerUnit: 100
@@ -383,6 +383,7 @@ GameObject:
   - component: {fileID: 53741331}
   - component: {fileID: 53741330}
   - component: {fileID: 53741335}
+  - component: {fileID: 53741336}
   m_Layer: 0
   m_Name: Pet 1
   m_TagString: Untagged
@@ -400,12 +401,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ae86bba737814721893742b91bb91368, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PetMovement
   leader: {fileID: 1999447282}
   followOffset: {x: -1.8, y: 0, z: -2.5}
   followDistance: 0.75
   repathInterval: 0.25
+  targetScanInterval: 0.25
 --- !u!114 &53741331
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -416,13 +418,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 73ce4b1d273bb654781c2b3329ef811f, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Unit
   faction: {fileID: 11400000, guid: 54fea6fdd0302f647b59737fc0b9502d, type: 2}
   factionRelations: {fileID: 11400000, guid: 53b09e6d544b7484a9d78bd45cd06e72, type: 2}
   isPlayerControlled: 1
   selectionVisual: {fileID: 495640472}
   maxHealth: 100
+  <CurrentHealth>k__BackingField: 0
 --- !u!114 &53741332
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -433,7 +436,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e7a9284918145b74e9a23bc40ed64579, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UnitMovement
 --- !u!195 &53741333
 NavMeshAgent:
@@ -484,11 +487,30 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d438ac17755cdd4499d331104423dedd, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UnitCombat
   damage: 10
   attackRange: 1.5
   attackCooldown: 1
+--- !u!114 &53741336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 53741329}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c60296ad2f5149e44953b833b38857bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UnitVision
+  visionRange: 8
+  visionAngle: 90
+  visionColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  obstacleMask:
+    serializedVersion: 2
+    m_Bits: 256
+  eyeHeight: 1
 --- !u!1 &129556030
 GameObject:
   m_ObjectHideFlags: 0
@@ -540,7 +562,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 0.392}
@@ -785,8 +807,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   m_RenderShadows: 1
   m_RequiresDepthTextureOption: 2
   m_RequiresOpaqueTextureOption: 2
@@ -833,7 +855,7 @@ GameObject:
   - component: {fileID: 333437375}
   - component: {fileID: 333437374}
   - component: {fileID: 333437379}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -850,7 +872,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2c63c06ba2baf9943b62a5a7fc16e551, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Inventory
   loadout: {fileID: 0}
   applyLoadoutOnAwake: 0
@@ -943,7 +965,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.10795, y: 1, z: 7.535}
-  m_LocalScale: {x: 2.31, y: 2.1, z: 1}
+  m_LocalScale: {x: 8.049426, y: 2.1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -958,7 +980,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e5887da65ea811f4f8162642bad65358, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Station
   stationName: StationTest
   interactRange: 2.5
@@ -1070,8 +1092,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   m_UsePipelineSettings: 1
   m_AdditionalLightsShadowResolutionTier: 2
   m_CustomShadowLayers: 0
@@ -1228,7 +1250,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
   m_Navigation:
     m_Mode: 3
@@ -1272,7 +1294,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1327,8 +1349,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
+  m_Name: 
+  m_EditorClassIdentifier: 
   m_IsGlobal: 1
   priority: 0
   blendDistance: 0
@@ -1392,7 +1414,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f5b46818eec7e864b904a41eaf661f46, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RTSCameraController
   panSpeed: 20
   cam: {fileID: 330585545}
@@ -1444,7 +1466,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f518cc66b586e2b42ad73d1cc029d5e9, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InventoryUI
   inventoryWindow: {fileID: 129556030}
   titleText: {fileID: 2127260098}
@@ -1499,7 +1521,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.ContentSizeFitter
   m_HorizontalFit: 0
   m_VerticalFit: 2
@@ -1513,7 +1535,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 59f8146938fff824cb5fd77236b75775, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.VerticalLayoutGroup
   m_Padding:
     m_Left: 0
@@ -1557,7 +1579,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 01614664b831546d2ae94a42149d80ac, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.UI.InputSystemUIInputModule
   m_SendPointerHoverToParent: 1
   m_MoveRepeatDelay: 0.5
@@ -1588,7 +1610,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.EventSystems.EventSystem
   m_FirstSelected: {fileID: 0}
   m_sendNavigationEvents: 1
@@ -1652,7 +1674,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 46dfcc90f77268b4db0727dd1f63856b, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RTSSelectionInput
   selectionBox: {fileID: 2094480565}
   canvas: {fileID: 10828156}
@@ -1670,7 +1692,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 05caad296df26914c9ed0806f47bb31f, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RTSInput
 --- !u!114 &1312473479
 MonoBehaviour:
@@ -1682,7 +1704,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 239b069a1a7d15842995a3bd9417407f, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SelectionManager
 --- !u!1 &1386878567
 GameObject:
@@ -1966,7 +1988,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -2103,7 +2125,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.ContentSizeFitter
   m_HorizontalFit: 0
   m_VerticalFit: 2
@@ -2117,7 +2139,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 59f8146938fff824cb5fd77236b75775, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.VerticalLayoutGroup
   m_Padding:
     m_Left: 0
@@ -2141,7 +2163,6 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 9223372036854775808}
   - component: {fileID: 1999447282}
   - component: {fileID: 1999447281}
   - component: {fileID: 1999447280}
@@ -2151,6 +2172,8 @@ GameObject:
   - component: {fileID: 1999447284}
   - component: {fileID: 1999447285}
   - component: {fileID: 1999447286}
+  - component: {fileID: 1999447287}
+  - component: {fileID: 1999447288}
   m_Layer: 0
   m_Name: MainChar
   m_TagString: Untagged
@@ -2168,7 +2191,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e7a9284918145b74e9a23bc40ed64579, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UnitMovement
 --- !u!114 &1999447279
 MonoBehaviour:
@@ -2180,13 +2203,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 73ce4b1d273bb654781c2b3329ef811f, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Unit
   faction: {fileID: 11400000, guid: 54fea6fdd0302f647b59737fc0b9502d, type: 2}
   factionRelations: {fileID: 11400000, guid: 53b09e6d544b7484a9d78bd45cd06e72, type: 2}
   isPlayerControlled: 1
   selectionVisual: {fileID: 1733978766}
   maxHealth: 100
+  <CurrentHealth>k__BackingField: 0
 --- !u!136 &1999447280
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2220,7 +2244,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 7
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -2259,7 +2283,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2c63c06ba2baf9943b62a5a7fc16e551, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Inventory
   loadout: {fileID: 11400000, guid: 48d27fa457d0f73489b0e704396bb9c6, type: 2}
   applyLoadoutOnAwake: 1
@@ -2274,7 +2298,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1b0f374c421388546bd57172c74e137f, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MainStationInteractor
 --- !u!114 &1999447285
 MonoBehaviour:
@@ -2286,7 +2310,7 @@ MonoBehaviour:
   m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e736ef3947d1b8548a8cb85b7c21357c, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MainCharacterMovement
 --- !u!114 &1999447286
 MonoBehaviour:
@@ -2298,11 +2322,47 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d438ac17755cdd4499d331104423dedd, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UnitCombat
   damage: 10
   attackRange: 1.5
   attackCooldown: 1
+--- !u!114 &1999447287
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1999447277}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c60296ad2f5149e44953b833b38857bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UnitVision
+  visionRange: 8
+  visionAngle: 90
+  visionColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  obstacleMask:
+    serializedVersion: 2
+    m_Bits: 256
+  eyeHeight: 1
+--- !u!114 &1999447288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1999447277}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae86bba737814721893742b91bb91368, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UnitOrders
+  leader: {fileID: 0}
+  followOffset: {x: 0, y: 0, z: -2}
+  followDistance: 0.75
+  repathInterval: 0.25
+  targetScanInterval: 0.25
 --- !u!1 &2094480564
 GameObject:
   m_ObjectHideFlags: 0
@@ -2351,7 +2411,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Outline
   m_EffectColor: {r: 0.9622642, g: 0.8305484, b: 0, a: 0.5}
   m_EffectDistance: {x: 5, y: 5}
@@ -2366,7 +2426,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 0.5019608}
@@ -2441,7 +2501,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name:
+  m_Name: 
   m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -2541,7 +2601,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 812598113418596362, guid: abf309d23359a8040beae24cf4725bc0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.8
+      value: 3.4
       objectReference: {fileID: 0}
     - target: {fileID: 812598113418596362, guid: abf309d23359a8040beae24cf4725bc0, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2579,14 +2639,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3509282182840466873, guid: abf309d23359a8040beae24cf4725bc0, type: 3}
-      propertyPath: faction
-      value: 
-      objectReference: {fileID: 11400000, guid: b61d9432426f07245be37dc54b80dd0a, type: 2}
-    - target: {fileID: 3509282182840466873, guid: abf309d23359a8040beae24cf4725bc0, type: 3}
-      propertyPath: factionRelations
-      value: 
-      objectReference: {fileID: 11400000, guid: 53b09e6d544b7484a9d78bd45cd06e72, type: 2}
     - target: {fileID: 4202124029876423718, guid: abf309d23359a8040beae24cf4725bc0, type: 3}
       propertyPath: m_Name
       value: Enemy
@@ -2644,14 +2696,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4235574520867169080, guid: 9c1f8824bf8b7be459332db67fdda8e3, type: 3}
-      propertyPath: faction
-      value: 
-      objectReference: {fileID: 11400000, guid: e251cabd4bab42b4c8bb6ac734562cd6, type: 2}
-    - target: {fileID: 4235574520867169080, guid: 9c1f8824bf8b7be459332db67fdda8e3, type: 3}
-      propertyPath: factionRelations
-      value: 
-      objectReference: {fileID: 11400000, guid: 53b09e6d544b7484a9d78bd45cd06e72, type: 2}
     - target: {fileID: 5419154829027645660, guid: 9c1f8824bf8b7be459332db67fdda8e3, type: 3}
       propertyPath: m_Name
       value: NPC
@@ -2677,19 +2721,3 @@ SceneRoots:
   - {fileID: 53741334}
   - {fileID: 10030107480928526}
   - {fileID: 7527010701041875436}
---- !u!114 &9223372036854775808
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1999447277}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae86bba737814721893742b91bb91368, type: 3}
-  m_Name:
-  m_EditorClassIdentifier:
-  leader: {fileID: 0}
-  followOffset: {x: 0, y: 0, z: -2}
-  followDistance: 0.75
-  repathInterval: 0.25

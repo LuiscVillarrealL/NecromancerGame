@@ -22,28 +22,29 @@ public class Unit : MonoBehaviour
     public bool IsDead => CurrentHealth <= 0;
     public event System.Action<int, int> HealthChanged;
     public event System.Action Died;
+    public event System.Action<Unit> Attacked;
 
-public FactionDefinition Faction => faction;
-public bool IsPlayerControlled => isPlayerControlled;
+    public FactionDefinition Faction => faction;
+    public bool IsPlayerControlled => isPlayerControlled;
     public UnitMovement Movement { get; private set; }
 
-  public bool IsAlly(Unit other)
-{
-    if (other == null || factionRelations == null)
-        return false;
+    public bool IsAlly(Unit other)
+    {
+        if (other == null || factionRelations == null)
+            return false;
 
-    return factionRelations.GetRelationship(faction, other.Faction)
-        == FactionRelationship.Allied;
-}
+        return factionRelations.GetRelationship(faction, other.Faction)
+            == FactionRelationship.Allied;
+    }
 
-public bool IsEnemy(Unit other)
-{
-    if (other == null || factionRelations == null)
-        return false;
+    public bool IsEnemy(Unit other)
+    {
+        if (other == null || factionRelations == null)
+            return false;
 
-    return factionRelations.GetRelationship(faction, other.Faction)
-        == FactionRelationship.Hostile;
-}
+        return factionRelations.GetRelationship(faction, other.Faction)
+            == FactionRelationship.Hostile;
+    }
 
     void Awake()
     {
@@ -52,29 +53,33 @@ public bool IsEnemy(Unit other)
         Movement = GetComponent<UnitMovement>();
     }
 
-    public void TakeDamage(int amount)
+    public void TakeDamage(int amount, Unit attacker = null)
     {
         if (amount <= 0 || IsDead) return;
 
         CurrentHealth -= Mathf.Min(amount, CurrentHealth);
         bool died = IsDead;
         HealthChanged?.Invoke(CurrentHealth, maxHealth);
+
+        if (!died && attacker != null)
+            Attacked?.Invoke(attacker);
+
         if (died)
         {
-            Die(died);
+            Die();
         }
 
 
 
     }
 
-    private void Die(bool died)
+    private void Die()
     {
         if (SelectionManager.Instance != null)
             SelectionManager.Instance.RemoveUnit(this);
         SetSelected(false);
         Debug.Log("This unit died!");
-        if (died) Died?.Invoke();
+        Died?.Invoke();
         gameObject.SetActive(false);
     }
 

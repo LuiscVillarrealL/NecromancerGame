@@ -137,6 +137,10 @@ MonoBehaviour:
   visionRange: 8
   visionAngle: 90
   visionColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  obstacleMask:
+    serializedVersion: 2
+    m_Bits: 256
+  eyeHeight: 1
 --- !u!1 &6336357841474200120
 GameObject:
   m_ObjectHideFlags: 0
